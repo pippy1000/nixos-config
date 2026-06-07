@@ -17,7 +17,7 @@
                 system = "x86_64-linux";
                 modules = [
                     ./configuration.nix
-                    ./etc/nixos/hardware-configuration.nix
+                    ./hosts/desktop/hardware-configuration.nix
                     ./hosts/desktop/nvidia.nix
                     ./hosts/desktop/gaming.nix
                     home-manager.nixosModules.home-manager
