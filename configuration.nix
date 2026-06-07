@@ -13,7 +13,8 @@
     services.getty.autologinUser = "ethan";
     services.upower.enable = true;
     services.blueman.enable = true;
-    
+    services.openssh.enable = true;  
+
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
 
