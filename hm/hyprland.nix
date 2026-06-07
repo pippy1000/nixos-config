@@ -1,16 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
     wayland.windowManager.hyprland.enable = false;
 
-    xdg.configFile."hypr/hyprland.lua" = {
-        source = ./hyprland.lua;
-        force = true;
-        onChange = ''
-            cp ${./hyprland.lua} $HOME/.config/hypr/hyprland.lua
-        '';
-    };
-
-    home.activation.copyHyprlandLua = config.lib.dag.entryAfter ["writeBoundary"] ''
-        cp -f ${./hyprland.lua} $HOME/.config/hypr/hyprland.lua
+    home.activation.installHyprlandLua = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        mkdir -p $HOME/.config/hypr
+        rm -f $HOME/.config/hypr/hyprland.lua
+        cp ${./hyprland.lua} $HOME/.config/hypr/hyprland.lua
+        chmod 644 $HOME/.config/hypr/hyprland.lua
     '';
 }
