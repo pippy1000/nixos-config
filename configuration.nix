@@ -1,16 +1,11 @@
 { config, lib, pkgs, ... }:
 {
-    imports = [
-        ./hosts/desktop/hardware-configuration.nix
-        ./hosts/desktop/nvidia.nix
-        ./hosts/desktop/gaming.nix
-    ];
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
     nixpkgs.config.allowUnfree = true;
 
-    networking.hostName = "hyprland-btw";
+    networking.hostName = "hyprland-lapbtw";
     networking.networkmanager.enable = true;
 
     time.timeZone = "America/Chicago";
