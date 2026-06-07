@@ -39,7 +39,7 @@
                     ./hosts/laptop/hardware-configuration.nix
                     ./hosts/laptop/nvidia.nix
                     ./hosts/desktop/gaming.nix
-                    { networking.hostName = "hyprland-lapbtw"; }
+                    ({ lib, ... }: { networking.hostName = lib.mkForce "hyprland-lapbtw"; })
                     home-manager.nixosModules.home-manager
                     {
                         home-manager = {
