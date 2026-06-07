@@ -66,8 +66,8 @@
                 kb_layout = us
                 follow_mouse = 1
                 sensitivity = 0
-                repeat_rate = 35
-                repeat_delay = 200
+                repeat_rate = 25
+                repeat_delay = 600
                 touchpad {
                     natural_scroll = false
                 }
