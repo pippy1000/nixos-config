@@ -69,8 +69,11 @@
         hyprpanel
         fastfetch
         spotify
+        libreoffice
+        neovim
     ];
 
+    environment.variables.EDITOR = "nvim";
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
    
     system.stateVersion = "26.05";
