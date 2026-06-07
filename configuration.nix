@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 {
     imports = [
-        ./nixos/hardware-configuration.nix
-        ./nixos/nvidia.nix
-        ./nixos/gaming.nix
+        ./hosts/desktop/hardware-configuration.nix
+        ./hosts/desktop/nvidia.nix
+        ./hosts/desktop/gaming.nix
     ];
 
     boot.loader.systemd-boot.enable = true;
