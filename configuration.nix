@@ -5,7 +5,7 @@
     boot.loader.efi.canTouchEfiVariables = true;
     nixpkgs.config.allowUnfree = true;
 
-    networking.hostName = "hyprland-lapbtw";
+    networking.hostName = "hyprland-btw";
     networking.networkmanager.enable = true;
 
     time.timeZone = "America/Chicago";
