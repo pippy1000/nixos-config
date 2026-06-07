@@ -5,7 +5,7 @@ hl.monitor({ output = "DP-2", mode = "1920x1080@165", position = "1920x0", scale
 
 -- Autostart
 hl.on("hyprland.start", function()
-    hl.exec_cmd("awww-daemon & hyprpanel &")
+    hl.exec_cmd("sleep 2 && awww-daemon & hyprpanel &")
 end)
 
 -- Environment

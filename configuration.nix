@@ -65,7 +65,6 @@
         pavucontrol
         wofi
         kdePackages.dolphin
-        hyprpanel
         awww
         hyprlock
         hyprpanel
@@ -73,6 +72,8 @@
         spotify
         libreoffice
         neovim
+        nodejs
+        ripgrep
     ];
 
     environment.variables.EDITOR = "nvim";
