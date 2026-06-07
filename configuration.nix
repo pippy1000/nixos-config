@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, hyprland, ... }:
 {
 
     boot.loader.systemd-boot.enable = true;
@@ -24,6 +24,8 @@
     };
 
     programs.hyprland = {
+        package = hyprland.packages.${pkgs.system}.hyprland;
+        portalPackage = hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
         enable = true;
         xwayland.enable = true;
         withUWSM = true;
@@ -41,7 +43,7 @@
     
     xdg.portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     
     };
 

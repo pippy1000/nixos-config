@@ -10,11 +10,15 @@
             url = "github:Jas-SinghFSU/HyprPanel";
             inputs.nixpkgs.follows = "nixpkgs";
         };
+        hyprland = {
+            url = "github:hyprwm/Hyprland/v0.55.0";
+        };
     };
-    outputs = { nixpkgs, home-manager, hyprpanel, ... }: {
+    outputs = { nixpkgs, home-manager, hyprpanel, hyprland, ... }: {
         nixosConfigurations = {
             hyprland-btw = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
+                specialArgs = { inherit hyprland; };
                 modules = [
                     ./configuration.nix
                     ./hosts/desktop/hardware-configuration.nix
@@ -34,6 +38,7 @@
             };
             hyprland-lapbtw = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
+                specialArgs = { inherit hyprland; };
                 modules = [
                     ./configuration.nix
                     ./hosts/laptop/hardware-configuration.nix
