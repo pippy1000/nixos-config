@@ -60,9 +60,9 @@
         alejandra
         lua-language-server
         vscode-langservers-extracted
-        nodePackages.intelephense
-        nodePackages.typescript-language-server
-        nodePackages.typescript
+        intelephense
+        typescript-language-server
+        typescript
         tree-sitter
         gnumake
         gcc
