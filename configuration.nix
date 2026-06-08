@@ -55,6 +55,17 @@
     ];
 
     environment.systemPackages = with pkgs; [
+        nil
+        clang-tools
+        alejandra
+        lua-language-server
+        vscode-langservers-extracted
+        nodePackages.intelephense
+        nodePackages.typescript-language-server
+        nodePackages.typescript
+        tree-sitter
+        gnumake
+        gcc
         vim
         wget
         foot
@@ -74,6 +85,7 @@
         neovim
         nodejs
         ripgrep
+        btop
     ];
 
     environment.variables.EDITOR = "nvim";
