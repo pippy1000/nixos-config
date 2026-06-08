@@ -13,6 +13,8 @@
     ./hyprpanel.nix
     ./hyprlock.nix
     ./hypridle.nix
+    ./starship.nix
+    ./zsh.nix
   ];
 
   home.username = "ethan";
@@ -35,7 +37,7 @@
   };
 
   programs.bash = {
-    enable = true;
+    enable = false;
     shellAliases = {
       btw = "echo i use hyprland btw";
     };

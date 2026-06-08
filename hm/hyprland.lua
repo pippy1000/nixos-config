@@ -2,7 +2,7 @@
 
 -- Autostart
 hl.on("hyprland.start", function()
-    hl.exec_cmd("sleep 2 && awww-daemon & hyprpanel &")
+    hl.exec_cmd("sleep 2 && awww & hyprpanel &")
 end)
 
 -- Environment

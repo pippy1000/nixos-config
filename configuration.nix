@@ -22,6 +22,9 @@
     enable = true;
     wantedBy = ["multi-user.target"];
   };
+
+  programs.zsh.enable = true;
+
   programs.hyprland = {
     enable = true;
     package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -31,6 +34,7 @@
   };
   users.users.ethan = {
     isNormalUser = true;
+    shell = pkgs.zsh;
     extraGroups = ["wheel" "networkmanager" "gamemode" "libvirtd"];
     hashedPassword = "$6$kvrvq7Da3uaaImZn$8cWprF20AI8mp90F4Dry4KVvOMSUZ2kRgWhNRkEY11iolOGaNjLYA/XnkIhA53fWU8HBNltbRa6rmNoW7qORD1";
     packages = with pkgs; [
