@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
     imports = [
         ./hyprland.nix
@@ -43,4 +43,11 @@
     };
     
     services.ssh-agent.enable = true;
-}
+    
+    home.activation.installNvimConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        mkdir -p $HOME/.config/nvim
+        cp -rf ${../nvim}/. $HOME/.config/nvim/
+        chmod -R u+w $HOME/.config/nvim/
+    '';    
+ }   
+
