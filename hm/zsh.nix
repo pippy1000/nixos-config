@@ -21,9 +21,9 @@
       la = "ls -la";
       ".." = "cd ..";
       "..." = "cd ../..";
-      nixswitch = "sudo nixos-rebuild switch --flake ~/.config/nixos#hyprland-btw";
-      nixlap = "sudo nixos-rebuild switch --flake ~/.config/nixos#hyprland-lapbtw";
-      nixup = "sudo nix flake update ~/.config/nixos";
+      nixswitch = "sudo nixos-rebuild switch --flake ~/nixos-config#hyprland-btw";
+      nixlap = "sudo nixos-rebuild switch --flake ~/nixos-config#hyprland-lapbtw";
+      nixup = "sudo nix flake update ~/nixos-config";
     };
 
     # loginExtra runs on login shell — this is where uwsm autostart goes

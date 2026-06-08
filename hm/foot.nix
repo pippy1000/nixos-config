@@ -18,7 +18,7 @@
       tweak = {
         font-monospace-warn = "no";
       };
-      colors = {
+      colors-dark = {
         foreground = "c0caf5";
         background = "1a1b26";
 
