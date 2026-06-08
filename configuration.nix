@@ -1,5 +1,10 @@
-{ config, lib, pkgs, hyprland, ... }:
+{ config, lib, pkgs, ... }:
 {
+    imports = [
+        ./nixos/hardware-configuration.nix
+        ./nixos/nvidia.nix
+        ./nixos/gaming.nix
+    ];
 
     boot.loader.systemd-boot.enable = true;
     boot.loader.efi.canTouchEfiVariables = true;
@@ -13,8 +18,7 @@
     services.getty.autologinUser = "ethan";
     services.upower.enable = true;
     services.blueman.enable = true;
-    services.openssh.enable = true;  
-
+    
     hardware.bluetooth.enable = true;
     hardware.bluetooth.powerOnBoot = true;
 
@@ -24,8 +28,6 @@
     };
 
     programs.hyprland = {
-        package = hyprland.packages.${pkgs.system}.hyprland;
-        portalPackage = hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
         enable = true;
         xwayland.enable = true;
         withUWSM = true;
@@ -34,16 +36,14 @@
     users.users.ethan = {
         isNormalUser = true;
         extraGroups = [ "wheel" ];
-        hashedPassword = "$6$kvrvq7Da3uaaImZn$8cWprF20AI8mp90F4Dry4KVvOMSUZ2kRgWhNRkEY11iolOGaNjLYA/XnkIhA53fWU8HBNltbRa6rmNoW7qORD1";
         packages = with pkgs; [
             tree
         ];
     };
-    users.users.root.hashedPassword = "$6$kvrvq7Da3uaaImZn$8cWprF20AI8mp90F4Dry4KVvOMSUZ2kRgWhNRkEY11iolOGaNjLYA/XnkIhA53fWU8HBNltbRa6rmNoW7qORD1";
     
     xdg.portal = {
       enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk ];
     
     };
 
@@ -55,17 +55,6 @@
     ];
 
     environment.systemPackages = with pkgs; [
-        nil
-        clang-tools
-        alejandra
-        lua-language-server
-        vscode-langservers-extracted
-        intelephense
-        typescript-language-server
-        typescript
-        tree-sitter
-        gnumake
-        gcc
         vim
         wget
         foot
@@ -76,20 +65,16 @@
         pavucontrol
         wofi
         kdePackages.dolphin
+        hyprpanel
         awww
         hyprlock
         hyprpanel
         fastfetch
         spotify
-        libreoffice
-        neovim
-        nodejs
-        ripgrep
-        btop
     ];
 
-    environment.variables.EDITOR = "nvim";
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
    
     system.stateVersion = "26.05";
+  swapDevices = [{ device = "/var/lib/swapfile"; size = 4096; }];
 }
