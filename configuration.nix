@@ -81,7 +81,8 @@
     tree-sitter
   ];
   environment.variables.EDITOR = "nvim";
-  boot.kernelModules = ["kvm-intel" "vfio" "vfio_iommu_type1" "vfio_pci"];
+  boot.kernelModules = ["kvm-intel"];
+  boot.initrd.kernelModules = ["vfio_pci" "vfio" "vfio_iommu_type1"];
   boot.kernelParams = ["intel_iommu=on" "iommu=pt"];
   virtualisation.libvirtd = {
     enable = true;
