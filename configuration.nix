@@ -115,6 +115,7 @@
     brightnessctl tree-sitter
     prismlauncher
     niri xwayland-satellite
+    pokemon-colorscripts
     noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 

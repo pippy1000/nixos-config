@@ -23,5 +23,6 @@
       nixlap = "sudo nixos-rebuild switch --flake ~/nixos-config#hyprland-lapbtw";
       nixup = "sudo nix flake update ~/nixos-config";
     };
+    initContent = "pokemon-colorscripts --no-title -r";
   };
 }
