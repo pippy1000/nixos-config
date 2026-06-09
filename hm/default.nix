@@ -15,6 +15,7 @@
     ./hypridle.nix
     ./starship.nix
     ./zsh.nix
+    ./kitty.nix
   ];
 
   home.username = "ethan";

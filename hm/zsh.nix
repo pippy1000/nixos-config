@@ -8,13 +8,11 @@
     enable = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
-
     history = {
       size = 10000;
       ignoreDups = true;
-      share = true; # share history across all terminal windows
+      share = true;
     };
-
     shellAliases = {
       btw = "echo i use hyprland btw";
       ll = "ls -la";
@@ -25,12 +23,5 @@
       nixlap = "sudo nixos-rebuild switch --flake ~/nixos-config#hyprland-lapbtw";
       nixup = "sudo nix flake update ~/nixos-config";
     };
-
-    # loginExtra runs on login shell — this is where uwsm autostart goes
-    loginExtra = ''
-      if uwsm check may-start; then
-          exec uwsm start hyprland.desktop
-      fi
-    '';
   };
 }

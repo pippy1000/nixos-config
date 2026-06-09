@@ -13,12 +13,20 @@
         hyprland = {
             url = "github:hyprwm/Hyprland/v0.55.0";
         };
+        quickshell = {
+            url = "github:outfoxxed/quickshell";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
+        noctalia = {
+            url = "github:noctalia-dev/noctalia-shell";
+            inputs.nixpkgs.follows = "nixpkgs";
+        };
     };
-    outputs = { nixpkgs, home-manager, hyprpanel, hyprland, ... }: {
+    outputs = { nixpkgs, home-manager, hyprpanel, hyprland, quickshell, noctalia, ... }: {
         nixosConfigurations = {
             hyprland-btw = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
-                specialArgs = { inherit hyprland; };
+                specialArgs = { inherit hyprland noctalia; };
                 modules = [
                     ./configuration.nix
                     ./hosts/desktop/hardware-configuration.nix
@@ -38,7 +46,7 @@
             };
             hyprland-lapbtw = nixpkgs.lib.nixosSystem {
                 system = "x86_64-linux";
-                specialArgs = { inherit hyprland; };
+                specialArgs = { inherit hyprland noctalia; };
                 modules = [
                     ./configuration.nix
                     ./hosts/laptop/hardware-configuration.nix

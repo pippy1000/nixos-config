@@ -71,7 +71,7 @@
       };
 
       character = {
-        success_symbol = "[❯](fg:#9ece6a bold)";
+        success_symbol = "[❯](fg:#bb9af7 bold)";
         error_symbol = "[❯](fg:#f7768e bold)";
       };
 

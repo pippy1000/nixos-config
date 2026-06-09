@@ -3,28 +3,41 @@
   lib,
   pkgs,
   hyprland,
+  noctalia,
   ...
 }: {
+  # Boot
   boot.loader.systemd-boot.enable = true;
+  boot.loader.systemd-boot.configurationLimit = 5;
   boot.loader.efi.canTouchEfiVariables = true;
-  nixpkgs.config.allowUnfree = true;
+  boot.kernelModules = ["kvm-intel"];
+  boot.initrd.kernelModules = ["vfio_pci" "vfio" "vfio_iommu_type1"];
+  boot.kernelParams = ["intel_iommu=on" "iommu=pt"];
+
+  # Networking
   networking.hostName = "hyprland-btw";
   networking.networkmanager.enable = true;
+
+  # Locale
   time.timeZone = "America/Chicago";
-  services.getty.autologinUser = "ethan";
-  services.upower.enable = true;
-  services.blueman.enable = true;
-  services.openssh.enable = true;
-  services.asusd.enable = true;
-  hardware.bluetooth.enable = true;
-  hardware.bluetooth.powerOnBoot = true;
-  systemd.services."getty@tty1" = {
+
+  # Nix
+  nixpkgs.config.allowUnfree = true;
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # Display manager
+  services.greetd.enable = true;
+  programs.regreet = {
     enable = true;
-    wantedBy = ["multi-user.target"];
+    font = {
+      name = "JetBrainsMono Nerd Font";
+      size = 14;
+    };
+    cursorTheme.name = "Adwaita";
+    theme.name = "Adwaita-dark";
   };
 
-  programs.zsh.enable = true;
-
+  # Compositors
   programs.hyprland = {
     enable = true;
     package = hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
@@ -32,62 +45,45 @@
     xwayland.enable = true;
     withUWSM = true;
   };
+  programs.niri.enable = true;
+  services.desktopManager.plasma6.enable = true;
+
+  # Shell
+  programs.zsh.enable = true;
+
+  # Hardware
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+
+  # Services
+  services.upower.enable = true;
+  services.blueman.enable = true;
+  services.openssh.enable = true;
+  services.asusd.enable = true;
+
+  # Portals
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  };
+
+  # Fonts
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.noto
+  ];
+
+  # Users
   users.users.ethan = {
     isNormalUser = true;
     shell = pkgs.zsh;
     extraGroups = ["wheel" "networkmanager" "gamemode" "libvirtd"];
     hashedPassword = "$6$kvrvq7Da3uaaImZn$8cWprF20AI8mp90F4Dry4KVvOMSUZ2kRgWhNRkEY11iolOGaNjLYA/XnkIhA53fWU8HBNltbRa6rmNoW7qORD1";
-    packages = with pkgs; [
-      tree
-    ];
+    packages = with pkgs; [tree];
   };
   users.users.root.hashedPassword = "$6$kvrvq7Da3uaaImZn$8cWprF20AI8mp90F4Dry4KVvOMSUZ2kRgWhNRkEY11iolOGaNjLYA/XnkIhA53fWU8HBNltbRa6rmNoW7qORD1";
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-  };
-  programs.firefox.enable = true;
-  fonts.packages = with pkgs; [
-    nerd-fonts.jetbrains-mono
-    nerd-fonts.noto
-  ];
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    foot
-    kitty
-    waybar
-    git
-    hyprpaper
-    pavucontrol
-    wofi
-    kdePackages.dolphin
-    hyprpanel
-    awww
-    hyprlock
-    fastfetch
-    spotify
-    libreoffice
-    neovim
-    nodejs
-    ripgrep
-    gnumake
-    gcc
-    lua-language-server
-    vscode-langservers-extracted
-    intelephense
-    typescript-language-server
-    typescript
-    nil
-    clang-tools
-    alejandra
-    brightnessctl
-    tree-sitter
-  ];
-  environment.variables.EDITOR = "nvim";
-  boot.kernelModules = ["kvm-intel"];
-  boot.initrd.kernelModules = ["vfio_pci" "vfio" "vfio_iommu_type1"];
-  boot.kernelParams = ["intel_iommu=on" "iommu=pt"];
+
+  # Virtualisation
   virtualisation.libvirtd = {
     enable = true;
     qemu.swtpm.enable = true;
@@ -97,6 +93,30 @@
     '';
   };
   programs.virt-manager.enable = true;
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+
+  # Packages
+  programs.firefox.enable = true;
+  environment.variables.EDITOR = "nvim";
+  environment.systemPackages = with pkgs; [
+    vim wget git neovim
+    foot kitty
+    waybar wofi
+    hyprpaper hyprlock hyprpanel awww
+    pavucontrol
+    kdePackages.dolphin
+    fastfetch btop
+    spotify libreoffice
+    nodejs ripgrep gnumake gcc
+    lua-language-server
+    vscode-langservers-extracted
+    intelephense
+    typescript-language-server typescript
+    nil clang-tools alejandra
+    brightnessctl tree-sitter
+    prismlauncher
+    niri xwayland-satellite
+    noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+  ];
+
   system.stateVersion = "26.05";
 }
